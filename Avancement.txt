@@ -2,3 +2,52 @@
 
 - utilisation de GitHub pour avancer sur le projet de façon synchroniser.
 - Début des recherches
+- Plusieurs idées :
+	* Ascenseurs cycliques ? Algo en fonction des horaires ?
+	Moyen d’appel des ascenseurs (1 boutons ou 2 ?)
+	(Gérer la population ?? une personne prend un ascenseur en fonction de la position 	de l’ascenseur ? ou aléatoirement ?)
+
+	Système d’horaire ??? Adapté la population ?
+	
+Pdf plan :
+
+http://sal.aalto.fi/publications/pdf-files/rsii97b.pdf
+
+——————————————————
+Source : https://www.quora.com/Is-there-any-public-elevator-scheduling-algorithm-standard
+
+4 algo différent.
+ - Séparer l'immeuble en autant de secteurs qu'il y a d'ascenseurs
+Et chaque ascenseur préféra un appel dans son secteur
+ - Séparer le building en plusieurs secteur 'montant/descendant' Chaque ascenseur sera soit montant soit descendant. 
+Et chaque ascenseur préféra un appel dans son secteur et dans sa direction
+ - Faire une séparation dynamique de l'immeuble. En fonction de l'emplacement des ascenseurs, tout au long de la journée, les secteurs varient.
+Et chaque ascenseur préféra un appel dans son secteur
+ - Chaque ascenseur dispose d'une variable de priorité. A chaque appel d'ascenseur l'algo va vérifier 3 critères sur chaque ascenseur. 
+   1. Si l'ascenseur se dirige vers l'appel et dans la même direction (vers le haut de l'immeuble par exemple), on attribue (NOMBRE_ETAGES +2) - DISTANCE_APPEL
+  2 . Identique mais dans la direction contraire  (N + 1) - D
+  3 . L'ascenseur ne se dirige pas vers l'appel : 1
+On attribue donc l'ascenseur ayant la plus haute priorité à l'appel.
+
+Pour plus d'infos voir la source, il explique des algo plus modernes encore.
+
+Seconde source : https://www.quora.com/What-algorithm-is-used-in-modern-day-elevators
+
+Le fonctionnement basique.
+1 . Si l'ascenseur est en mouvement il continue dans sa lancé, récupère les personnes dans sa trajectoire (s'il y a de la place) et finis la liste d'exécution.
+2 . Une fois fait, il s'arrête et attends un appel et on reviens à 1.
+
+
+—————————————————————————
+
+Quelques exemples de simulation :
+
+http://www.commentcamarche.net/forum/affich-4866110-simulation-d-ascenceur
+
+
+—————————————
+
+Ergonomie :
+
+Ascenseur coloré, quand quelqu’un prend l’ascenseur, il devient de la couleur de l’ascenseur… (A voir plutard)
+
