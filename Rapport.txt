@@ -1,0 +1,66 @@
+Compte rendu 
+
+ 18/01 :
+
+- Présents : Tout le groupe.
+
+- rencontré pour la première fois M.Montassier pour débuter le projet.
+- dressé un premier calendrier, avec les objectifs sur les semaines suivantes, vu une première esquisse qu'il fallait obtenir en pour l'interface  graphique.
+- Mise en place les objectifs d'une réunion ainsi de ce qu'il fallait faire suite à celle-ci.
+- Choix du langage : Python avec Tkinter comme interface graphique ou C++.
+- Décision d'une plateforme de communication : Skype.
+- Décision sur un créneau où l'on pourra se voir : Lundi après-midi.
+
+-Objectifs pour la semaine prochaine :
+Recherche sur des plans/infos de building,  recherche sur python/C++, recherche des problèmes qui peuvent arriver lors du développement du projet.
+
+Prochaine réunion : Mercredi prochain (25/01) 14h.
+
+
+
+
+25/01 :
+
+- Absent : Arnaud
+- Un seul bouton d’ascenseur par étage.
+- Mise en place d’un ascenseur cyclique serait une bonne idée, mais cela soulève quelques problèmes.
+- Abandon de l’idée d’avoir de la couleur dans la simulation.
+- Mise en place de plusieurs algo en fonctions de l’horaires ?
+- Mise en place d’un Git.
+
+
+
+- Objectifs pour la semaine suivante :
+
+	Commencez à réfléchir/programmer une simulation sur 1 seul ascenseur 2 groupes de 2.
+	Continuer les recherches (plus ordonnance) 
+	Recherche du livre : Elevator Traffic Handbook: Theory and Practice
+	
+
+- Sources :
+Algo : 
+
+https://www.quora.com/What-algorithm-is-used-in-modern-day-elevators  
+https://www.quora.com/Is-there-any-public-elevator-scheduling-algorithm-standard
+
+Image plan : 
+https://upload.wikimedia.org/wikipedia/commons/e/e4/World_Trade_Center_Building_Design_with_Floor_and_Elevator_Arrangement.svg
+
+Exemple de simulation : 
+http://www.commentcamarche.net/forum/affich-4866110-simulation-d-ascenceur
+
+Autres :
+http://sal.aalto.fi/publications/pdf-files/rsii97b.pdf
+http://apprendre-python.com/page-tkinter-interface-graphique-python-tutoriel
+
+Prochaine réunion : Mercredi prochain (01/02) 14h.
+
+
+
+
+
+
+
+
+
+
