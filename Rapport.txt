@@ -55,8 +55,17 @@ http://apprendre-python.com/page-tkinter-interface-graphique-python-tutoriel
 
 Prochaine réunion : Mercredi prochain (01/02) 14h.
 
+01/02 :
 
+Absent : Dorian
 
+Présentation du programme.
+Objectifs pour la semaine prochaine : Adapter le programme à l’architecture de tout le monde.
+Commenter le code, corriger le bug avec l’ascenseur bloqué.
+Amélioration de l’interface graphique, il faut le rendre plus ergonomique, plus simple et qu’il donne le plus d’informations dans un espace réduit.
+Améliorer l’algorithme.
+
+Prochaine réunion : Mercredi prochain (08/02) 14h
 
 
 
