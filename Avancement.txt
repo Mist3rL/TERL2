@@ -57,3 +57,9 @@ Ascenseur coloré, quand quelqu’un prend l’ascenseur, il devient de la coule
 25/01 :
 
 Ordonnancement
+
+
+
+22/02 :
+
+Gérer personnes Aim Etage.

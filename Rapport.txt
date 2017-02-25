@@ -68,8 +68,22 @@ Améliorer l’algorithme.
 Prochaine réunion : Mercredi prochain (08/02) 14h
 
 
+22/02 :
 
+Tous présent.
 
+Présentation du travail de Rayan pendant les vacances.
+Nous avons toujours un problème avec l’architecture Mac OS.
+Nous avons décidé de passer tous sous Windows.
+Bug réglé.
 
+Objectifs pour la semaine prochaine :
+- Zoom/Dézoom
+- Modifier la vitesse de la simulation en live
+- Nb de personne sur un étage.
+- Code couleur (rentre dans l’ascenseur/ sort)
+- Regarder le code. 
+- Bug au niveau des ascenseur : si une personne veut aller à l’étage 20 et qu’il n’y a pas d’ascenseur direct => temps infini.
+- Essayer la simulation avec 1 ascenseur, puis 2 pour analyser les comportements (Bug avec 1 ascenseur) 
 
-
+Prochaine réunion : Mercredi 01/03 14h.
