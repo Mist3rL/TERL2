@@ -21,16 +21,16 @@ int main (int argc, char** argv)
     vector<Ascenseur> ascenseurs;
     ascenseurs.push_back(Ascenseur(1)); /// On créé un ascenseur en lui associant la colonne 1
     ascenseurs.push_back(Ascenseur(2));
-    ascenseurs.push_back(Ascenseur(3));
+    /*ascenseurs.push_back(Ascenseur(3));
     ascenseurs.push_back(Ascenseur(4));
     ascenseurs.push_back(Ascenseur(5));
     ascenseurs.push_back(Ascenseur(6));
-    ascenseurs.push_back(Ascenseur(7));
+    ascenseurs.push_back(Ascenseur(7));*/
     Immeuble immeubles(NOMBRE_ETAGES);
-    immeubles.getListesEtages()[0].addAscenseur(2, ascenseurs); /// On associe à l'étage 0 l'ascenseur ayant la 2ème id
+    /*immeubles.getListesEtages()[0].addAscenseur(2, ascenseurs); /// On associe à l'étage 0 l'ascenseur ayant la 2ème id
     immeubles.getListesEtages()[2].addAscenseur(2, ascenseurs);
     immeubles.getListesEtages()[4].addAscenseur(2, ascenseurs);
-   immeubles.getListesEtages()[0].addAscenseur(3, ascenseurs);
+    immeubles.getListesEtages()[0].addAscenseur(3, ascenseurs);
     immeubles.getListesEtages()[1].addAscenseur(3, ascenseurs);
     immeubles.getListesEtages()[3].addAscenseur(3, ascenseurs);
     immeubles.getListesEtages()[0].addAscenseur(4, ascenseurs);
@@ -40,11 +40,16 @@ int main (int argc, char** argv)
     immeubles.getListesEtages()[5].addAscenseur(4, ascenseurs);
     immeubles.getListesEtages()[6].addAscenseur(5, ascenseurs);
     immeubles.getListesEtages()[7].addAscenseur(6, ascenseurs);
-    immeubles.getListesEtages()[8].addAscenseur(7, ascenseurs);
-    for (size_t i=0;i<NOMBRE_ETAGES;i++)
+    immeubles.getListesEtages()[8].addAscenseur(7, ascenseurs);*/
+    for (size_t i=0;i<NOMBRE_ETAGES;i+=2)
     {
         immeubles.getListesEtages()[i].addAscenseur(1, ascenseurs);
     }
+    for (size_t i=1;i<NOMBRE_ETAGES;i+=2)
+    {
+        immeubles.getListesEtages()[i].addAscenseur(2, ascenseurs);
+    }
+    immeubles.getListesEtages()[1].addAscenseur(1, ascenseurs);
     atexit(SDL_Quit);
     LoaderObject surfaces(ascenseurs.size()); /// Chargement des objets ect...
     long tempsActuel = 0, tempsPrecedent = 0, timestamp = 0;
