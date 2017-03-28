@@ -52,10 +52,10 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
     int best_indice=-1;
     for (size_t i=0;i<NOMBRE_PERSONNES;i++)
     {
-        if (!this->listes[i].getIsHome()) /// Si la personne n'est toujours pas rentrÈ chez elle
+        if (!this->listes[i].getIsHome()) /// Si la personne n'est toujours pas rentr√© chez elle
         {
             ta=this->listes[i].getTimeArrive();
-            if (ta>0) /// Si elle n'est pas arrivÈ encore
+            if (ta>0) /// Si elle n'est pas arriv√© encore
             {
                 ta=ta-((float)tempsEcoule/1000);
                 if (ta<=0) /// Elle vient d'arriver, on lui dit d'aller au "bouton"
@@ -69,7 +69,7 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
                 }
                 this->listes[i].setTimeArrive(ta);
             }
-            else if (ta<=0) /// La personne est dÈj‡ la
+            else if (ta<=0) /// La personne est d√©j√† la
             {
                 float temp=0;
                 if (!this->listes[i].getVisible() && this->listes[i].getAscenseurId()==-1) /// Si on est pas visible et pas dans un ascenseur, on fait des courses
@@ -94,15 +94,15 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
                     this->listes[i].setTempsAttente(this->listes[i].getTempsAttente()+((float)tempsEcoule/1000));
                     for (size_t j=0;j<listes.size();j++)
                     {
-                        /// L'ascenseur peut venir ‡ l'Ètage actuel de la personne
+                        /// L'ascenseur peut venir √† l'√©tage actuel de la personne
                         if (vectorHave(this->listes[i].getCurrentEtage(), listes[j].getEtages()))
                         {
-                            /// peut aller ‡ l'Ètage voulu de la personne
+                            /// peut aller √† l'√©tage voulu de la personne
                             if (vectorHave(this->listes[i].getNextEtages(), listes[j].getEtages()))
                             {
                                 /// Soit l'ascenseur est vide soit il se dirige vers la bonne direction
-                                /// Il faut vÈrifier que l'ascenseur passe devant notre Ètage
-                                /// Il faut vÈrifier que l'ascenseur se dirige vers notre Ètage
+                                /// Il faut v√©rifier que l'ascenseur passe devant notre √©tage
+                                /// Il faut v√©rifier que l'ascenseur se dirige vers notre √©tage
                                 if (listes[j].getNbrPersonnes()==0 ||
                                     (listes[j].seekEtagesAim(this->listes)>listes[j].getCurrentEtages()
                                      && this->listes[i].getNextEtages()>this->listes[i].getCurrentEtage()
@@ -121,7 +121,7 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
 
                         }
                     }
-                    /// On parcours la liste des ascenseurs qui nous intÈresse
+                    /// On parcours la liste des ascenseurs qui nous int√©resse
                     for (size_t j=0;j<listes_ascenseurAble.size() && !find;j++)
                     {
                         if (listes[listes_ascenseurAble[j]].getCurrentEtages()==this->listes[i].getCurrentEtage() && listes[listes_ascenseurAble[j]].getVitesse()==0)
@@ -164,7 +164,7 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
                         }
                         if (find)
                         {
-                            if ((listes[best_index].getVitesse() || !listes[best_index].getHadToWait()) && this->listes[i].getCurrentEtage()!=listes[best_index].getCurrentEtages()) /// Il est en mouvement Ou immobile mais n'attends personne, on lui indique un nouvel arrÍt
+                            if ((listes[best_index].getVitesse() || !listes[best_index].getHadToWait()) && this->listes[i].getCurrentEtage()!=listes[best_index].getCurrentEtages()) /// Il est en mouvement Ou immobile mais n'attends personne, on lui indique un nouvel arr√™t
                             {
                                 listes[best_index].setEtagesAim(this->listes[i].getCurrentEtage());
                             }
@@ -174,13 +174,15 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
                     best_index=-1;
                     if (!find)
                     {
+                        // Si un chemin a √©t√© trouv√©e
                         if (getPath(listes, this->listes[i].getNextEtages(), this->listes[i].getCurrentEtage(), listesTemp))
                         {
+                            // Si le chemin est plus long de 1 √©tapes
                             if (listesTemp.size()>1)
-                            {
-                                cout << listesTemp[listesTemp.size()-1] << " et " << listesTemp[listesTemp.size()-2] << endl;
+                            {    
+                                // On r√©cup√®re l'√©tage qu'il y a en commun entre les 2 ascenseurs qu'on a eu gr√¢ce √† getPath
                                 int etages_commun=vectorGetCommun(listes[listesTemp[listesTemp.size()-1]].getEtages(), listes[listesTemp[listesTemp.size()-2]].getEtages())[0];
-                                cout << "=" << etages_commun << endl;
+                                // Puis on g√®re comme d'habitude l'ascenseur....
                                 if (listes[listesTemp[listesTemp.size()-1]].getCurrentEtages()==this->listes[i].getCurrentEtage() && listes[listesTemp[listesTemp.size()-1]].getVitesse()==0)
                                 {
                                     listes[listesTemp[listesTemp.size()-1]].increaseWait();
@@ -213,14 +215,14 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
                                     if (find)
                                     {
                                         if ((listes[listesTemp[listesTemp.size()-1]].getVitesse() || !listes[listesTemp[listesTemp.size()-1]].getHadToWait()) &&
-                                            this->listes[i].getCurrentEtage()!=listes[listesTemp[listesTemp.size()-1]].getCurrentEtages()) /// Il est en mouvement Ou immobile mais n'attends personne, on lui indique un nouvel arrÍt
+                                            this->listes[i].getCurrentEtage()!=listes[listesTemp[listesTemp.size()-1]].getCurrentEtages()) /// Il est en mouvement Ou immobile mais n'attends personne, on lui indique un nouvel arr√™t
                                         {
                                             listes[listesTemp[listesTemp.size()-1]].setEtagesAim(this->listes[i].getCurrentEtage());
                                         }
                                     }
                                 }
                             }
-                            listesTemp.clear();
+                            listesTemp.clear(); // On vide notre vecteur de getPath
                         }
                     }
                     best_index=-1;
@@ -236,10 +238,10 @@ void gererPersonnesAscenseur(Ascenseur& ascenseur, Population& pop, LoaderObject
     vector <unsigned int> had_to_remove;
     for (size_t i=0;i<ascenseur.getPersonnes().size();i++)
     {
-        /// L'ascenseur est arrivÈ ‡ l'Ètage o˘ l'on souhaite descendre pour nos courses
+        /// L'ascenseur est arriv√© √† l'√©tage o√π l'on souhaite descendre pour nos courses
         if (pop.getListe()[ascenseur.getPersonnes()[i]].getNextEtages()==(int)ascenseur.getCurrentEtages())
         {
-            /// De ce fait on met ‡ jours positions, vitesse ect...
+            /// De ce fait on met √† jours positions, vitesse ect...
             p.y=objects.getSurface(ECRAN)->h-(ascenseur.getCurrentEtages())*objects.getSurface(ASCENSEUR)->h-objects.getSurface(PERSONNE)->h;
             p.x=ascenseur.getCols()*objects.getSurface(ASCENSEUR)->w-objects.getSurface(ASCENSEUR)->w/2-objects.getSurface(PERSONNE)->w/2;
             pop.getListe()[ascenseur.getPersonnes()[i]].setPosition(p.x, p.y);
@@ -254,7 +256,7 @@ void gererPersonnesAscenseur(Ascenseur& ascenseur, Population& pop, LoaderObject
         }
         else if (pop.getListe()[ascenseur.getPersonnes()[i]].getAimEtage()==(int)ascenseur.getCurrentEtages())
         {
-            /// Ici l'ascenseur est arrivÈ ‡ un Ètage qui nous permet de prendre un autre ascenseur
+            /// Ici l'ascenseur est arriv√© √† un √©tage qui nous permet de prendre un autre ascenseur
             p.y=objects.getSurface(ECRAN)->h-(ascenseur.getCurrentEtages())*objects.getSurface(ASCENSEUR)->h-objects.getSurface(PERSONNE)->h;
             p.x=ascenseur.getCols()*objects.getSurface(ASCENSEUR)->w-objects.getSurface(ASCENSEUR)->w/2-objects.getSurface(PERSONNE)->w/2;
             pop.getListe()[ascenseur.getPersonnes()[i]].setPosition(p.x, p.y);
@@ -268,7 +270,7 @@ void gererPersonnesAscenseur(Ascenseur& ascenseur, Population& pop, LoaderObject
             had_to_remove.push_back(ascenseur.getPersonnes()[i]);
         }
     }
-    /// On stock les personnes qui sortent de l'ascenseur dans une variable vecteur pour Èviter de
+    /// On stock les personnes qui sortent de l'ascenseur dans une variable vecteur pour √©viter de
     /// ne pas faire le tour du for au dessus.
     for (size_t i=0;i<had_to_remove.size();i++)
     {
@@ -286,7 +288,7 @@ void gererAscenseurs(vector<Ascenseur>& liste, Population& population)
             /// S'il ne doit pas attendre une personne et qu'il y a du monde dedans
             if (!liste[i].getHadToWait() && liste[i].getNbrPersonnes()>0)
             {
-                liste[i].setEtagesAim(liste[i].seekEtagesAim(population.getListe())); /// et on prend donc la premiËre destination en croissant
+                liste[i].setEtagesAim(liste[i].seekEtagesAim(population.getListe())); /// et on prend donc la premi√®re destination en croissant
             }
         }
     }
@@ -294,7 +296,7 @@ void gererAscenseurs(vector<Ascenseur>& liste, Population& population)
 
 void Population::save()
 {
-    ofstream fichier("population.config", ios::out | ios::trunc); // ouverture en Ècriture avec effacement du fichier ouvert
+    ofstream fichier("population.config", ios::out | ios::trunc); // ouverture en √©criture avec effacement du fichier ouvert
     vector<Decision> a;
     if(fichier)
     {
@@ -312,6 +314,12 @@ void Population::save()
     }
 }
 
+/**** Retourne true si un chemin a √©t√© trouv√©
+Les arguments sont un vector d'ascenseurs, l'√©tage qu'on souhaite atteindre, l'√©tage d'o√π l'on commence et un vector d'int vide
+Le vector est rang√© dans l'ordre inverse, exemple : 
+Si l'on souhaite allez √† l'√©tage 10, et que pour cela nous devons prendre l'ascenseur 0 -> 1 -> 3, le vector sera : 3 -> 1 -> 0
+Il faut donc utiliser v.size()-1 et v.size()-2
+****/
 bool getPath(vector<Ascenseur>& listes, int etages_aim, int etages_start, vector<int>& v)
 {
     if (etages_aim==etages_start)
