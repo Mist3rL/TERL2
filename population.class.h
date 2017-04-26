@@ -22,6 +22,6 @@ class Population{
 };
 void gererPersonnesAscenseur(Ascenseur&, Population&, LoaderObject&, int);
 void gererAscenseurs(std::vector<Ascenseur>&, Population&); /// Permet de donner des ordres aux ascenseurs pour savoir s'ils doivent monter ou descendre (en fonction de leur passagers)
-bool getPath(std::vector<Ascenseur>&, int, int, std::vector<int>&);
-
+bool getPath(std::vector<Ascenseur>&, int, int, std::vector< std::vector<int> >&);
+bool getPathSub(std::vector<Ascenseur>&, int, int, std::vector<int>&);
 #endif // POPULATION_CLASS_H
