@@ -23,7 +23,7 @@ void Personne::init(int nombres_etages)
     vector<int> temps;
     temps.push_back(4820);temps.push_back(3630); temps.push_back(4520); temps.push_back(4220); temps.push_back(4370); temps.push_back(4280);
     temps.push_back(4400); temps.push_back(5000); temps.push_back(3640); temps.push_back(4320);
-    random_shuffle(temps.begin(), temps.end()); /// On mélange le vecteur à propos du temps
+    random_shuffle(temps.begin(), temps.end()); /// On mÃ©lange le vecteur Ã  propos du temps
     countPersonnes++;
     id=countPersonnes;
     visible=false;
@@ -51,8 +51,8 @@ void Personne::init(int nombres_etages)
     for (int i=0;i<nombres_destination_down;i++)
     {
         do{
-            temp=rand()%(nombres_etages-1)+1; /// On ne veut pas que cela amène à l'étage 0
-        }while(vectorHave(temp, etages) || temp==listes_montant[listes_montant.size()-1].getEtages()); /// On ne veut pas qu'il descende à l'étage où il est 8->9->9-7 par exemple
+            temp=rand()%(nombres_etages-1)+1; /// On ne veut pas que cela amÃ¨ne Ã  l'Ã©tage 0
+        }while(vectorHave(temp, etages) || temp==listes_montant[listes_montant.size()-1].getEtages()); /// On ne veut pas qu'il descende Ã  l'Ã©tage oÃ¹ il est 8->9->9-7 par exemple
         etages.push_back(temp);
     }
     sort(etages.begin(), etages.end(), greater<int>());
