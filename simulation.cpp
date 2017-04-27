@@ -4,7 +4,13 @@ using namespace std;
 
 void simulation(LoaderObject& surfaces, Immeuble& immeubles, vector<Ascenseur>& ascenseurs, Population& pop)
 {
-    int SPEED_SIMULATION=1;
+    int h=7,m=59,s=58;
+    float timeL=0;
+    ControlPoint listMax[780], listMin[780], listMoy[780];
+    int nombresInfosMax=0, nombresInfosMin=0, nombresInfosMoy=0;
+    int SPEED_SIMULATION=60;
+    float temps_moyen=0;
+    float temps_total=0;
     long tempsActuel = 0, tempsPrecedent = 0, timestamp = 0;
     int cameraVx = 0, cameraVy = 0;
     SDL_Rect camera={0};
@@ -35,34 +41,6 @@ void simulation(LoaderObject& surfaces, Immeuble& immeubles, vector<Ascenseur>& 
                             pause=!pause;
                             if (pause)
                             {
-                                float timeL=(float)timestamp/1000;
-                                int h=7,m=59,s=58;
-                                h+=timeL/3600;
-                                timeL-=(h-7)*3600;
-                                m+=timeL/60;
-                                timeL-=(m-59)*60;
-                                s+=timeL;
-                                if (s>59)
-                                {
-                                    m+=s/60;
-                                    s=s%60;
-                                }
-                                if (m>59)
-                                {
-                                    h+=m/60;
-                                    m=m%60;
-                                }
-                                float temps_moyen=0;
-                                float temps_total=0;
-                                for (size_t i=0;i<NOMBRE_PERSONNES;i++)
-                                {
-                                    temps_total+=pop.getListe()[i].getTempsTotal();
-                                    if (pop.getListe()[i].getNombreVoyages()==0)
-                                        temps_moyen+=pop.getListe()[i].getTempsTotal();
-                                    else
-                                        temps_moyen+=pop.getListe()[i].getTempsTotal()/pop.getListe()[i].getNombreVoyages();
-                                }
-                                temps_moyen=temps_moyen/(float)NOMBRE_PERSONNES;
                                 cout << endl << endl;
                                 cout << "Heure : " << h << ":" << m << ":" << s << endl;
                                 cout << "Le temps d'attente total est de " << temps_total << " secondes." << endl;
@@ -119,7 +97,7 @@ void simulation(LoaderObject& surfaces, Immeuble& immeubles, vector<Ascenseur>& 
                             }
                             if (sInfos.isHoverMinus && SPEED_SIMULATION>1)
                                 SPEED_SIMULATION--;
-                            else if (sInfos.isHoverPlus && SPEED_SIMULATION<20)
+                            else if (sInfos.isHoverPlus && SPEED_SIMULATION<60)
                                 SPEED_SIMULATION++;
                             else if (sInfos.isHoverPause)
                                 pause=!pause;
@@ -127,6 +105,29 @@ void simulation(LoaderObject& surfaces, Immeuble& immeubles, vector<Ascenseur>& 
                     }
                 break;
             }
+        }
+        h=7;
+        m=59;
+        s=58;
+        timeL=(float)timestamp/1000;
+        h+=timeL/3600;
+        timeL-=(h-7)*3600;
+        m+=timeL/60;
+        timeL-=(m-59)*60;
+        s+=timeL;
+        if (s>59)
+        {
+            m+=s/60;
+            s=s%60;
+        }
+        if (m>59)
+        {
+            h+=m/60;
+            m=m%60;
+        }
+        if (h==20)
+        {
+            continuer=false;
         }
         /// La gestion de la caméra.. on s'en fiche un peu
         if ((cameraVx>0 && camera.x+cameraVx+(surfaces.getSurface(ECRAN)->w)<=ascenseurs.size()*surfaces.getSurface(ASCENSEUR)->w) || (cameraVx<0 && camera.x+cameraVx>=0))
@@ -167,6 +168,10 @@ void simulation(LoaderObject& surfaces, Immeuble& immeubles, vector<Ascenseur>& 
             bougerAscenseurs(surfaces, ascenseurs, (tempsActuel-tempsPrecedent)*SPEED_SIMULATION, pop); /// Moteur physique des ascenseurs
             bougerPersonnes(surfaces, pop, (tempsActuel-tempsPrecedent)*SPEED_SIMULATION, ascenseurs); /// Moteur physique des personnes
             timestamp+=(tempsActuel-tempsPrecedent)*SPEED_SIMULATION;
+            getTemps(temps_moyen, temps_total, pop);
+            ajoutInfos(timestamp, temps_moyen, listMoy, nombresInfosMoy);
+            ajoutInfos(timestamp, Personne::minTime, listMin, nombresInfosMin);
+            ajoutInfos(timestamp, Personne::maxTime, listMax, nombresInfosMax);
         }
         tempsPrecedent=tempsActuel;
         SDL_FillRect(surfaces.getSurface(ECRAN), 0, SDL_MapRGB(surfaces.getSurface(ECRAN)->format, 0, 0, 0));
@@ -182,4 +187,5 @@ void simulation(LoaderObject& surfaces, Immeuble& immeubles, vector<Ascenseur>& 
     TTF_CloseFont(police);
     TTF_CloseFont(policeLittle);
     SDL_FreeSurface(texte);
+    creerGraphique(listMax, listMin, listMoy, nombresInfosMax, nombresInfosMin, nombresInfosMoy);
 }

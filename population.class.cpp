@@ -39,6 +39,18 @@ Personne* Population::getListe()
 {
     return listes;
 }
+void getTemps(float& temps_moyen, float& temps_total, Population& pop)
+{
+    for (size_t i=0;i<NOMBRE_PERSONNES;i++)
+    {
+        temps_total+=pop.getListe()[i].getTempsTotal();
+        if (pop.getListe()[i].getNombreVoyages()==0)
+            temps_moyen+=pop.getListe()[i].getTempsTotal();
+        else
+            temps_moyen+=pop.getListe()[i].getTempsTotal()/pop.getListe()[i].getNombreVoyages();
+    }
+    temps_moyen=temps_moyen/(float)NOMBRE_PERSONNES;
+}
 void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject& objects)
 {
     unsigned int id_pers;
@@ -102,7 +114,6 @@ void Population::gerer(int tempsEcoule, vector<Ascenseur>& listes, LoaderObject&
                             listesTemp=listesTempT[w];
                             if (listes[listesTemp[listesTemp.size()-1]].canAcceptPeople())
                             {
-                                // Si le chemin est plus long de 1 étapes
                                 int etages_commun=this->listes[i].getNextEtages();
                                 if (listesTemp.size()>1)
                                 {
